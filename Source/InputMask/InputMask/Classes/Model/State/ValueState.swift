@@ -32,6 +32,7 @@ class ValueState: State {
         case Numeric
         case Literal
         case AlphaNumeric
+        case Symbol
     }
     
     let type: StateType
@@ -44,6 +45,8 @@ class ValueState: State {
                 return CharacterSet.letters.isMember(character: char)
             case .AlphaNumeric:
                 return CharacterSet.alphanumerics.isMember(character: char)
+            case .Symbol:
+                return !CharacterSet.whitespacesAndNewlines.isMember(character: char)
         }
     }
     
@@ -87,6 +90,8 @@ class ValueState: State {
                     return "[0] -> " + (nil != self.child ? self.child!.debugDescription : "nil")
                 case .AlphaNumeric:
                     return "[_] -> " + (nil != self.child ? self.child!.debugDescription : "nil")
+                case .Symbol:
+                    return "[*] -> " + (nil != self.child ? self.child!.debugDescription : "nil")
             }
         }
     }

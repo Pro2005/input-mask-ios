@@ -200,6 +200,17 @@ private extension Compiler {
                 )
             }
             
+            if "*" == char {
+                return ValueState(
+                    child: try self.compile(
+                        string.truncateFirst(),
+                        valueable: true,
+                        fixed: false
+                    ),
+                    type: ValueState.StateType.Symbol
+                )
+            }
+            
             throw CompilerError.WrongFormat
         }
         
